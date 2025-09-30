@@ -1,6 +1,12 @@
 import express from 'express'
 import { sequelize } from './schema/db'
-import { authRoutes, cardRoutes, invoiceRoutes } from './routes'
+import {
+  authRoutes,
+  cardRoutes,
+  invoiceRoutes,
+  userRoutes,
+  notificationRoutes,
+} from './routes'
 import dotenv from 'dotenv'
 import authenticatedToken from './middleware/auth'
 import walletRoutes from './routes/walletRoutes'
@@ -40,13 +46,15 @@ app.use('/api/invoice', authenticatedToken, invoiceRoutes)
 app.use('/api/cards', cardRoutes)
 app.use('/api/wallets', walletRoutes) // Add this line
 app.use('/api/transactions', transRoutes) // Add this line
+app.use('/api/user', userRoutes) // Add this line
+app.use('/api/notifications', notificationRoutes) // Add this line
 
 // Test the database connection
 sequelize
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.')
-    return sequelize.sync()
+    return sequelize.sync({ alter: true })
   })
   .then(() => {
     console.log('Database synced.')

@@ -6,4 +6,14 @@ const sequelize = new Sequelize({
   logging: false,
 })
 
+// export async function syncDatabase(
+//   options: { force?: boolean; alter?: boolean } = { alter: true }
+// ) {
+//   await sequelize.authenticate()
+//   // alter:true will try to ALTER tables to match models (non-destructive in many cases)
+//   // force:true will DROP and recreate tables (destructive)
+//   await sequelize.sync({ force: !!options.force, alter: !!options.alter })
+//   console.log('Database synced', options)
+// }
+
 export { sequelize }

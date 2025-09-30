@@ -6,6 +6,8 @@ import Item from './Item'
 import Card from './Card'
 import Wallet from './Wallet'
 import Transaction from './Transaction'
+import Beneficiary from './Beneficiary'
+import Notification from './Notification'
 
 // Define Associations
 User.hasMany(Invoice, { foreignKey: 'userId', as: 'invoices' })
@@ -32,4 +34,23 @@ Card.belongsTo(Wallet, { foreignKey: 'walletId', as: 'wallet' })
 Wallet.hasMany(Transaction, { foreignKey: 'walletId', as: 'transactions' })
 Transaction.belongsTo(Wallet, { foreignKey: 'walletId', as: 'wallet' })
 
-export { User, Invoice, Customer, Address, Item, Card, Wallet, Transaction }
+// A User has many Beneficiaries
+User.hasMany(Beneficiary, { foreignKey: 'userId', as: 'beneficiaries' })
+Beneficiary.belongsTo(User, { foreignKey: 'userId', as: 'user' })
+
+// A User has many Notifications
+User.hasMany(Notification, { foreignKey: 'userId', as: 'notifications' })
+Notification.belongsTo(User, { foreignKey: 'userId', as: 'user' })
+
+export {
+  User,
+  Invoice,
+  Customer,
+  Address,
+  Item,
+  Card,
+  Wallet,
+  Transaction,
+  Beneficiary,
+  Notification,
+}

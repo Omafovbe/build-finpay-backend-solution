@@ -7,7 +7,7 @@ class User extends Model {
   public email!: string
   public password!: string
   public name!: string
-  public accountType!: string // Freelancer or Company
+  public accountType!: string
   public country!: string
   public countryCode!: string
   public state!: string
@@ -15,6 +15,9 @@ class User extends Model {
   public phoneNumber!: string
   public resetPasswordToken!: string | null
   public resetPasswordExpires!: Date | null
+  public twoFactorSecret!: string | null
+  public twoFactorEnabled!: boolean
+  public twoFactorBackupCodes!: string | null
   public createdAt!: Date
   public updatedAt!: Date
 
@@ -76,6 +79,18 @@ User.init(
     },
     resetPasswordExpires: {
       type: DataTypes.DATE,
+      allowNull: true,
+    },
+    twoFactorSecret: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    twoFactorEnabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    twoFactorBackupCodes: {
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     createdAt: {
