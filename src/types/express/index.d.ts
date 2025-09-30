@@ -1,9 +1,11 @@
-import { JwtPayload } from 'jsonwebtoken'
-
 declare global {
   namespace Express {
     interface Request {
-      user?: JwtPayload | { userId: string } // Or whatever type your user object has
+      // This extends the Request interface to include a 'user' property.
+      // The user property is optional ('?') because not all requests will be authenticated.
+      user?: {
+        userId: number | string // Ensure this matches the type of your User ID (number or string)
+      }
     }
   }
 }

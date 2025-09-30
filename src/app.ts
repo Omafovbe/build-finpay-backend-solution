@@ -1,8 +1,12 @@
 import express from 'express'
 import { sequelize } from './schema/db'
-import { authRoutes, invoiceRoutes } from './routes'
+import { authRoutes, cardRoutes, invoiceRoutes } from './routes'
 import dotenv from 'dotenv'
 import authenticatedToken from './middleware/auth'
+import walletRoutes from './routes/walletRoutes'
+import transRoutes from './routes/transRoutes'
+import { swaggerUi, specs } from './swagger'
+import redoc from 'redoc-express'
 
 dotenv.config()
 
@@ -12,9 +16,30 @@ const port = process.env.PORT || 3000
 // Middleware
 app.use(express.json())
 
+// Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
+
+// Redoc
+app.get(
+  '/redoc',
+  redoc({
+    title: 'FinPay API Documentation',
+    specUrl: '/api-docs.json',
+  })
+)
+
+// API Docs JSON endpoint
+app.get('/api-docs.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json')
+  res.send(specs)
+})
+
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/invoice', authenticatedToken, invoiceRoutes)
+app.use('/api/cards', cardRoutes)
+app.use('/api/wallets', walletRoutes) // Add this line
+app.use('/api/transactions', transRoutes) // Add this line
 
 // Test the database connection
 sequelize

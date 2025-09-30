@@ -11,6 +11,7 @@ class Invoice extends Model {
   public issueDate!: Date
   public dueDate!: Date
   public userId!: number // Foreign Key to User
+  public status!: string
   public readonly createdAt!: Date
   public readonly updatedAt!: Date
 }
@@ -49,6 +50,11 @@ Invoice.init(
         model: User,
         key: 'id',
       },
+    },
+    status: {
+      type: DataTypes.ENUM('pending', 'draft', 'paid'),
+      allowNull: false,
+      defaultValue: 'pending',
     },
     createdAt: {
       type: DataTypes.DATE,
