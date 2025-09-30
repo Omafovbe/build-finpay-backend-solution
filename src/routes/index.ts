@@ -5,6 +5,7 @@ import userRoutes from './userRoutes'
 import walletRoutes from './walletRoutes'
 import transRoutes from './transRoutes'
 import notificationRoutes from './notificationRoutes'
+import dashboardRoutes from './dashboardRoutes'
 
 export {
   authRoutes,
@@ -14,4 +15,5 @@ export {
   walletRoutes,
   transRoutes,
   notificationRoutes,
+  dashboardRoutes,
 }

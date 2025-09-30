@@ -1,4 +1,3 @@
-
 # Mastering Backend - Build FinPay: A FinTech Solution
 
 ![Design preview for the Build FinPay: A FinTech Solution Project](https://pub-63da695b9ece47c5b3b49bd78b86d884.r2.dev/Build%20FinPay%20A%20FinTech%20Solution.png)
@@ -35,9 +34,9 @@ You should have a working API with the functionalities mentioned above. Also, th
 
 ## Where to find everything
 
-Your task is to Build FinPay: A FinTech Solution. You will find an SQLite database file called `db.sqlite` inside the root folder. You will find the front end of each project on the project description page. 
+Your task is to Build FinPay: A FinTech Solution. You will find an SQLite database file called `db.sqlite` inside the root folder. You will find the front end of each project on the project description page.
 
-You can click on the `Preview Frontend` to have a visual view of what the project is all about. 
+You can click on the `Preview Frontend` to have a visual view of what the project is all about.
 
 If you would like the Figma design file to gain experience using professional tools and build more accurate projects faster, you can [subscribe as a PRO member](https://app.masteringbackend.com/projects).
 
@@ -82,12 +81,12 @@ Remember, if you're looking for feedback on your solution, be sure to ask questi
 
 There are multiple places you can share your solution:
 
-1. Share your solution page in the **#finished-projects** channel of our [community](https://masteringbackend.com/community). 
+1. Share your solution page in the **#finished-projects** channel of our [community](https://masteringbackend.com/community).
 2. Tweet [@master_backend](https://twitter.com/master_backend) and mention **@master_backend**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
 3. Share your solution on other social channels like LinkedIn.
 4. Blog about your experience building your project. Writing about your workflow, and technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please edit them and include specific questions when you're looking for feedback. 
+We provide templates to help you share your solution once you've submitted it on the platform. Please edit them and include specific questions when you're looking for feedback.
 
 The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
 
@@ -95,6 +94,9 @@ The more specific you are with your questions the more likely it is that another
 
 We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email info[at]masteringbackend[dot]com.
 
- Want more projects: [Backend Projects](https://projects.masteringbackend.com) Please share it with anyone who will find it useful for practice.
+Want more projects: [Backend Projects](https://projects.masteringbackend.com) Please share it with anyone who will find it useful for practice.
 
+## TODO
+
+[] correct rates fetched using the base currency
 **Have fun building!** 🚀

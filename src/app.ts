@@ -6,6 +6,7 @@ import {
   invoiceRoutes,
   userRoutes,
   notificationRoutes,
+  dashboardRoutes,
 } from './routes'
 import dotenv from 'dotenv'
 import authenticatedToken from './middleware/auth'
@@ -44,10 +45,11 @@ app.get('/api-docs.json', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/invoice', authenticatedToken, invoiceRoutes)
 app.use('/api/cards', cardRoutes)
-app.use('/api/wallets', walletRoutes) // Add this line
-app.use('/api/transactions', transRoutes) // Add this line
-app.use('/api/user', userRoutes) // Add this line
-app.use('/api/notifications', notificationRoutes) // Add this line
+app.use('/api/wallets', walletRoutes)
+app.use('/api/transactions', transRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/notifications', notificationRoutes)
+app.use('/api/dashboard', dashboardRoutes)
 
 // Test the database connection
 sequelize
