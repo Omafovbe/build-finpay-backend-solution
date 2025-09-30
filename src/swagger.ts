@@ -29,7 +29,7 @@ const options = {
           type: 'object',
           properties: {
             id: {
-              type: 'string',
+              type: 'integer',
               description: 'User ID',
             },
             email: {
@@ -37,18 +37,48 @@ const options = {
               format: 'email',
               description: 'User email address',
             },
-            firstName: {
+            name: {
               type: 'string',
-              description: 'User first name',
+              description: 'User full name',
             },
-            lastName: {
+            accountType: {
               type: 'string',
-              description: 'User last name',
+              enum: ['Freelancer', 'Company'],
+              description: 'Type of account',
+            },
+            country: {
+              type: 'string',
+              description: 'User country',
+            },
+            countryCode: {
+              type: 'string',
+              description: 'Country code',
+            },
+            state: {
+              type: 'string',
+              description: 'User state/province',
+            },
+            address: {
+              type: 'string',
+              description: 'User address',
+            },
+            phoneNumber: {
+              type: 'string',
+              description: 'User phone number',
+            },
+            twoFactorEnabled: {
+              type: 'boolean',
+              description: 'Two-factor authentication status',
             },
             createdAt: {
               type: 'string',
               format: 'date-time',
               description: 'Account creation timestamp',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Account last update timestamp',
             },
           },
         },
@@ -70,7 +100,17 @@ const options = {
         },
         RegisterRequest: {
           type: 'object',
-          required: ['email', 'password', 'firstName', 'lastName'],
+          required: [
+            'email',
+            'password',
+            'name',
+            'accountType',
+            'country',
+            'countryCode',
+            'state',
+            'address',
+            'phoneNumber',
+          ],
           properties: {
             email: {
               type: 'string',
@@ -82,44 +122,106 @@ const options = {
               minLength: 6,
               description: 'User password',
             },
-            firstName: {
+            name: {
               type: 'string',
-              description: 'User first name',
+              description: 'User full name',
             },
-            lastName: {
+            accountType: {
               type: 'string',
-              description: 'User last name',
+              enum: ['Freelancer', 'Company'],
+              description: 'Type of account',
+            },
+            country: {
+              type: 'string',
+              description: 'User country',
+            },
+            countryCode: {
+              type: 'string',
+              description: 'Country code (e.g., US, NG, GB)',
+            },
+            state: {
+              type: 'string',
+              description: 'User state/province',
+            },
+            address: {
+              type: 'string',
+              description: 'User full address',
+            },
+            phoneNumber: {
+              type: 'string',
+              description: 'User phone number',
             },
           },
         },
         Card: {
           type: 'object',
           properties: {
-            id: {
+            card_reference: {
               type: 'string',
-              description: 'Card ID',
+              description: 'Unique card reference ID (UUID)',
             },
-            userId: {
+            reference: {
               type: 'string',
-              description: 'User ID',
+              description: 'Card reference number',
             },
-            cardNumber: {
+            type: {
               type: 'string',
-              description: 'Masked card number',
+              description: 'Card type (virtual, physical, etc.)',
             },
-            cardType: {
+            currency: {
               type: 'string',
-              enum: ['credit', 'debit'],
-              description: 'Type of card',
+              description: 'Card currency code',
             },
-            expiryDate: {
+            holder_name: {
               type: 'string',
-              description: 'Card expiry date',
+              description: 'Cardholder name',
+            },
+            brand: {
+              type: 'string',
+              description: 'Card brand (visa, mastercard, etc.)',
+            },
+            expiry_month: {
+              type: 'string',
+              description: 'Card expiry month (MM)',
+            },
+            expiry_year: {
+              type: 'string',
+              description: 'Card expiry year (YYYY)',
+            },
+            first_six: {
+              type: 'string',
+              description: 'First 6 digits of card number',
+            },
+            last_four: {
+              type: 'string',
+              description: 'Last 4 digits of card number',
+            },
+            status: {
+              type: 'string',
+              description: 'Card status',
+            },
+            date: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Card creation date',
+            },
+            fees: {
+              type: 'number',
+              description: 'Card fees',
+            },
+            walletId: {
+              type: 'string',
+              description: 'Associated wallet ID',
             },
             createdAt: {
               type: 'string',
               format: 'date-time',
               description: 'Card creation timestamp',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Card last update timestamp',
             },
           },
         },
@@ -128,24 +230,29 @@ const options = {
           properties: {
             id: {
               type: 'string',
-              description: 'Wallet ID',
+              description: 'Unique wallet ID (UUID)',
             },
             userId: {
-              type: 'string',
-              description: 'User ID',
-            },
-            currency: {
-              type: 'string',
-              description: 'Wallet currency code',
+              type: 'integer',
+              description: 'User ID (foreign key)',
             },
             balance: {
               type: 'number',
-              description: 'Current balance',
+              description: 'Current wallet balance (decimal)',
+            },
+            currency: {
+              type: 'string',
+              description: 'Wallet currency code (e.g., USD, NGN, EUR)',
             },
             createdAt: {
               type: 'string',
               format: 'date-time',
               description: 'Wallet creation timestamp',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Wallet last update timestamp',
             },
           },
         },
@@ -154,11 +261,11 @@ const options = {
           properties: {
             id: {
               type: 'string',
-              description: 'Transaction ID',
+              description: 'Unique transaction ID (UUID)',
             },
-            userId: {
+            walletId: {
               type: 'string',
-              description: 'User ID',
+              description: 'Associated wallet ID (UUID)',
             },
             type: {
               type: 'string',
@@ -167,20 +274,30 @@ const options = {
             },
             amount: {
               type: 'number',
-              description: 'Transaction amount',
+              description: 'Transaction amount (decimal)',
             },
-            currency: {
+            status: {
               type: 'string',
-              description: 'Transaction currency',
+              enum: ['pending', 'completed', 'failed'],
+              description: 'Transaction status',
             },
             description: {
               type: 'string',
               description: 'Transaction description',
             },
+            currency: {
+              type: 'string',
+              description: 'Transaction currency code',
+            },
             createdAt: {
               type: 'string',
               format: 'date-time',
-              description: 'Transaction timestamp',
+              description: 'Transaction creation timestamp',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Transaction last update timestamp',
             },
           },
         },
@@ -189,38 +306,44 @@ const options = {
           properties: {
             id: {
               type: 'string',
-              description: 'Invoice ID',
-            },
-            userId: {
-              type: 'string',
-              description: 'User ID',
+              description: 'Unique invoice ID (UUID)',
             },
             customerId: {
               type: 'string',
-              description: 'Customer ID',
-            },
-            amount: {
-              type: 'number',
-              description: 'Invoice amount',
+              description: 'Customer ID (UUID)',
             },
             currency: {
               type: 'string',
-              description: 'Invoice currency',
+              description: 'Invoice currency code',
             },
-            status: {
+            issueDate: {
               type: 'string',
-              enum: ['pending', 'paid', 'overdue', 'cancelled'],
-              description: 'Invoice status',
+              format: 'date-time',
+              description: 'Invoice issue date',
             },
             dueDate: {
               type: 'string',
-              format: 'date',
+              format: 'date-time',
               description: 'Invoice due date',
+            },
+            userId: {
+              type: 'integer',
+              description: 'User ID (foreign key)',
+            },
+            status: {
+              type: 'string',
+              enum: ['pending', 'draft', 'paid'],
+              description: 'Invoice status',
             },
             createdAt: {
               type: 'string',
               format: 'date-time',
               description: 'Invoice creation timestamp',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Invoice last update timestamp',
             },
           },
         },
